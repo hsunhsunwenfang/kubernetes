@@ -25,7 +25,7 @@ jobs:
         echo $node_ip;
     - name: scp test
       run:
-        ssh-keygen -f "/home/${{ secrets.USER }}/.ssh/known_hosts" -R "$node_ip"
+        ssh-keygen -f "/home/${{ secrets.USER }}/.ssh/known_hosts" -R $node_ip;
         scp -i ${{ secrets.SSH_KEY_PATH }} /home/${{ secrets.USER }}/test.sh  ${{secrets.USER}}@$node_ip:/home/${{secrets.USER}}/test.sh
     - name: build kubelet
       working-directory: /home/${{ secrets.USER }}/kubernetes
