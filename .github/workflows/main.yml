@@ -25,6 +25,7 @@ jobs:
         echo $node_ip;
     - name: scp test
       run:
+        ssh-keygen -f "/home/${{ secrets.USER }}/.ssh/known_hosts" -R "$node_ip"
         scp -i ${{ secrets.SSH_KEY_PATH }} /home/${{ secrets.USER }}/test.sh  ${{secrets.USER}}@$node_ip:/home/${{secrets.USER}}/test.sh
     - name: build kubelet
       working-directory: /home/${{ secrets.USER }}/kubernetes
@@ -33,7 +34,6 @@ jobs:
         # KUBE_BUILD_PLATFORMS=linux/amd64 make all WHAT=cmd/kubelet GOFLAGS=-v
     - name: scp kubelet to node
       run:
-        ssh-keygen -f "/home/${{ secrets.USER }}/.ssh/known_hosts" -R "$node_ip"
         scp -i ${{ secrets.SSH_KEY_PATH }} /home/${{ secrets.USER }}/kubernetes/_output/local/bin/linux/amd64/kubelet  ${{secrets.USER}}@$node_ip:/home/${{secrets.USER}}/kubelet
     - name: replace and restart kubelet
       run:
