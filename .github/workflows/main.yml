@@ -5,8 +5,6 @@ name: build-kubelet
 on:
   push:
     branches: [ "my-v1.27.7" ]
-  workflow-dispatch:
-    branches: [ "my-v1.27.7" ]
 jobs:
   check-bats-version:
     # choose runner on label
