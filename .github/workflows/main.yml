@@ -2,7 +2,11 @@
 
 # runs on a self-hosted agent
 name: build-kubelet
-on: [push, workflow_dispatch]
+on:
+  push:
+    branches: [ "my-v1.27.7" ]
+  workflow-dispactch:
+    branches: [ "my-v1.27.7" ]
 jobs:
   check-bats-version:
     # choose runner on label
