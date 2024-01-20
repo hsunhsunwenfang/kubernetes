@@ -629,11 +629,15 @@ func run(ctx context.Context, s *options.KubeletServer, kubeDeps *kubelet.Depend
 
 	var cgroupRoots []string
 	// s -> options.KubeletServer
+	// kubeDeps -> kubelet.Dependencies
 	// cm -> cm.ContainerManager
 	nodeAllocatableRoot := cm.NodeAllocatableRoot(s.CgroupRoot, s.CgroupsPerQOS, s.CgroupDriver)
 	klog.Info("nodeAllocatableRoot: ", nodeAllocatableRoot)
 	cgroupRoots = append(cgroupRoots, nodeAllocatableRoot)
 	kubeletCgroup, err := cm.GetKubeletContainer(s.KubeletCgroups)
+	klog.Info("kubeletCgroup: ", kubeletCgroup)
+	klog.Info("s.RuntimeCgroups: ", s.RuntimeCgroups)
+	klog.Info("s.SystemCgroups: ", s.SystemCgroups)
 	if err != nil {
 		klog.InfoS("Failed to get the kubelet's cgroup. Kubelet system container metrics may be missing.", "err", err)
 	} else if kubeletCgroup != "" {
