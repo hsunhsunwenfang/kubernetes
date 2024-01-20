@@ -26,6 +26,9 @@ import (
 	"k8s.io/apimachinery/pkg/util/naming"
 	utilruntime "k8s.io/apimachinery/pkg/util/runtime"
 	"k8s.io/apimachinery/pkg/util/sets"
+
+	// Debug
+	"k8s.io/klog/v2"
 )
 
 // Scheme defines methods for serializing and deserializing API objects, a type
@@ -141,6 +144,7 @@ func (s *Scheme) AddKnownTypes(gv schema.GroupVersion, types ...Object) {
 	s.addObservedVersion(gv)
 	for _, obj := range types {
 		t := reflect.TypeOf(obj)
+		klog.Info("Kevin Checking types", t.Name(), "AddKnownTypes", "t", t, "gv", gv)
 		if t.Kind() != reflect.Pointer {
 			panic("All types must be pointers to structs.")
 		}
