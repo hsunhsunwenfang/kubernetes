@@ -632,12 +632,12 @@ func run(ctx context.Context, s *options.KubeletServer, kubeDeps *kubelet.Depend
 	// kubeDeps -> kubelet.Dependencies
 	// cm -> cm.ContainerManager
 	nodeAllocatableRoot := cm.NodeAllocatableRoot(s.CgroupRoot, s.CgroupsPerQOS, s.CgroupDriver)
-	klog.Info("nodeAllocatableRoot: ", nodeAllocatableRoot)
+	klog.Info("Kevin D nodeAllocatableRoot: ", nodeAllocatableRoot)
 	cgroupRoots = append(cgroupRoots, nodeAllocatableRoot)
 	kubeletCgroup, err := cm.GetKubeletContainer(s.KubeletCgroups)
-	klog.Info("kubeletCgroup: ", kubeletCgroup)
-	klog.Info("s.RuntimeCgroups: ", s.RuntimeCgroups)
-	klog.Info("s.SystemCgroups: ", s.SystemCgroups)
+	klog.Info("Kevin D kubeletCgroup: ", kubeletCgroup)
+	klog.Info("Kevin D s.RuntimeCgroups: ", s.RuntimeCgroups)
+	klog.Info("Kevin D s.SystemCgroups: ", s.SystemCgroups)
 	if err != nil {
 		klog.InfoS("Failed to get the kubelet's cgroup. Kubelet system container metrics may be missing.", "err", err)
 	} else if kubeletCgroup != "" {
@@ -654,6 +654,7 @@ func run(ctx context.Context, s *options.KubeletServer, kubeDeps *kubelet.Depend
 		cgroupRoots = append(cgroupRoots, s.SystemCgroups)
 	}
 
+	klog.Info("Kevin D CAdvisorInterface: ", kubeDeps.CAdvisorInterface)
 	if kubeDeps.CAdvisorInterface == nil {
 		imageFsInfoProvider := cadvisor.NewImageFsInfoProvider(s.ContainerRuntimeEndpoint)
 		kubeDeps.CAdvisorInterface, err = cadvisor.New(imageFsInfoProvider, s.RootDirectory, cgroupRoots, cadvisor.UsingLegacyCadvisorStats(s.ContainerRuntimeEndpoint), s.LocalStorageCapacityIsolation)
