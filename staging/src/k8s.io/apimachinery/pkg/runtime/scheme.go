@@ -142,9 +142,14 @@ func (s *Scheme) AddUnversionedTypes(version schema.GroupVersion, types ...Objec
 // APIVersionInternal constant if you have a type that does not have a formal version.
 func (s *Scheme) AddKnownTypes(gv schema.GroupVersion, types ...Object) {
 	s.addObservedVersion(gv)
+	klog.Info("Kevin group version ", gv)
 	for _, obj := range types {
 		t := reflect.TypeOf(obj)
-		klog.Info("Kevin Checking types", t.Name(), "AddKnownTypes", "t", t, "gv", gv)
+
+		klog.Info("Kevin t.Kind() ", t.Kind())
+		klog.Info("Kevin t.Name() ", t.Name())
+		klog.Info("Kevin t.Elem() ", t.Elem())
+
 		if t.Kind() != reflect.Pointer {
 			panic("All types must be pointers to structs.")
 		}
