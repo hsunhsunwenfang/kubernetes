@@ -655,6 +655,10 @@ func run(ctx context.Context, s *options.KubeletServer, kubeDeps *kubelet.Depend
 	}
 
 	klog.Info("Kevin D CAdvisorInterface: ", kubeDeps.CAdvisorInterface)
+	klog.Info("Kevin D s.RootDirectory: ", s.RootDirectory)
+	klog.Info("Kevin D s.ContainerRuntimeEndpoint: ", s.ContainerRuntimeEndpoint)
+	klog.Info("Kevin D cadvisor.UsingLegacyCadvisorStats(s.ContainerRuntimeEndpoint): ", cadvisor.UsingLegacyCadvisorStats(s.ContainerRuntimeEndpoint))
+	klog.Info("Kevin D s.LocalStorageCapacityIsolation: ", s.LocalStorageCapacityIsolation)
 	if kubeDeps.CAdvisorInterface == nil {
 		imageFsInfoProvider := cadvisor.NewImageFsInfoProvider(s.ContainerRuntimeEndpoint)
 		kubeDeps.CAdvisorInterface, err = cadvisor.New(imageFsInfoProvider, s.RootDirectory, cgroupRoots, cadvisor.UsingLegacyCadvisorStats(s.ContainerRuntimeEndpoint), s.LocalStorageCapacityIsolation)
