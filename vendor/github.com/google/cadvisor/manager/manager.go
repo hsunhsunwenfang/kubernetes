@@ -202,6 +202,10 @@ func New(memoryCache *memory.InMemoryCache, sysfs sysfs.SysFs, houskeepingConfig
 		containerEnvMetadataWhiteList:         containerEnvMetadataWhiteList,
 	}
 
+	klog.Info("Kevin D - New manager", newManager)
+	klog.Info("Kevin D - cadvisorContainer", newManager.cadvisorContainer)
+	klog.Info("Kevin D - includedMetricsSet", newManager.includedMetrics)
+
 	machineInfo, err := machine.Info(sysfs, fsInfo, inHostNamespace)
 	if err != nil {
 		return nil, err
