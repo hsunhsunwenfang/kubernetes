@@ -14,9 +14,9 @@ jobs:
     # run kubectl get node -owide and extrat the node name and ip address into variables
     - name: get node name and ip of 1st row
       run: |
-        kubectl get node -owide
-        echo "node_name=$(kubectl get nodes -owide | awk 'NR==2' | awk '{print $1}')" >> $GITHUB_ENV
-        echo "node_ip=$(kubectl get nodes -owide | awk 'NR==2' | awk '{print $6}')" >> $GITHUB_ENV
+        kubectl get no -l beta.kubernetes.io/os=linux -owide
+        echo "node_name=$(kubectl get no -l beta.kubernetes.io/os=linux -owide | awk 'NR==2' | awk '{print $1}')" >> $GITHUB_ENV
+        echo "node_ip=$(kubectl get no -l beta.kubernetes.io/os=linux -owide | awk 'NR==2' | awk '{print $6}')" >> $GITHUB_ENV
     # scp file into the node by using the node name and ip address
     - name : check node output
       run:
