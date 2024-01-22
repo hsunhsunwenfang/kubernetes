@@ -82,15 +82,27 @@ func New(imageFsInfoProvider ImageFsInfoProvider, rootPath string, cgroupRoots [
 	sysFs := sysfs.NewRealSysFs()
 
 	includedMetrics := cadvisormetrics.MetricSet{
-		cadvisormetrics.CpuUsageMetrics:     struct{}{},
-		cadvisormetrics.PerCpuUsageMetrics:  struct{}{},
-		cadvisormetrics.MemoryUsageMetrics:  struct{}{},
-		cadvisormetrics.CpuLoadMetrics:      struct{}{},
-		cadvisormetrics.DiskIOMetrics:       struct{}{},
-		cadvisormetrics.NetworkUsageMetrics: struct{}{},
-		cadvisormetrics.AppMetrics:          struct{}{},
-		cadvisormetrics.ProcessMetrics:      struct{}{},
-		cadvisormetrics.OOMMetrics:          struct{}{},
+		cadvisormetrics.CpuUsageMetrics:                struct{}{},
+		cadvisormetrics.ProcessSchedulerMetrics:        struct{}{},
+		cadvisormetrics.PerCpuUsageMetrics:             struct{}{},
+		cadvisormetrics.MemoryUsageMetrics:             struct{}{},
+		cadvisormetrics.MemoryNumaMetrics:              struct{}{},
+		cadvisormetrics.CpuLoadMetrics:                 struct{}{},
+		cadvisormetrics.DiskIOMetrics:                  struct{}{},
+		cadvisormetrics.DiskUsageMetrics:               struct{}{},
+		cadvisormetrics.NetworkUsageMetrics:            struct{}{},
+		cadvisormetrics.NetworkTcpUsageMetrics:         struct{}{},
+		cadvisormetrics.NetworkAdvancedTcpUsageMetrics: struct{}{},
+		cadvisormetrics.NetworkUdpUsageMetrics:         struct{}{},
+		cadvisormetrics.ProcessMetrics:                 struct{}{},
+		cadvisormetrics.AppMetrics:                     struct{}{},
+		cadvisormetrics.HugetlbUsageMetrics:            struct{}{},
+		cadvisormetrics.PerfMetrics:                    struct{}{},
+		cadvisormetrics.ReferencedMemoryMetrics:        struct{}{},
+		cadvisormetrics.CPUTopologyMetrics:             struct{}{},
+		cadvisormetrics.ResctrlMetrics:                 struct{}{},
+		cadvisormetrics.CPUSetMetrics:                  struct{}{},
+		cadvisormetrics.OOMMetrics:                     struct{}{},
 	}
 
 	if usingLegacyStats || localStorageCapacityIsolation {
