@@ -424,6 +424,7 @@ func (s *Server) InstallDefaultHandlers() {
 	// cAdvisor metrics are exposed under the secured handler as well
 	r := compbasemetrics.NewKubeRegistry()
 	r.RawMustRegister(metrics.NewPrometheusMachineCollector(prometheusHostAdapter{s.host}, includedMetrics))
+	klog.Info("Kevin D utilfeature.DefaultFeatureGate.Enabled(features.PodAndContainerStatsFromCRI)", utilfeature.DefaultFeatureGate.Enabled(features.PodAndContainerStatsFromCRI))
 	if utilfeature.DefaultFeatureGate.Enabled(features.PodAndContainerStatsFromCRI) {
 		r.CustomRegister(collectors.NewCRIMetricsCollector(context.TODO(), s.host.ListPodSandboxMetrics, s.host.ListMetricDescriptors))
 	} else {

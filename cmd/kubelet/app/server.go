@@ -654,6 +654,7 @@ func run(ctx context.Context, s *options.KubeletServer, kubeDeps *kubelet.Depend
 		cgroupRoots = append(cgroupRoots, s.SystemCgroups)
 	}
 
+	// kubeDeps.CAdvisorInterface is nil, so create a new one
 	klog.Info("Kevin D CAdvisorInterface: ", kubeDeps.CAdvisorInterface)
 	klog.Info("Kevin D s.RootDirectory: ", s.RootDirectory)
 	klog.Info("Kevin D s.ContainerRuntimeEndpoint: ", s.ContainerRuntimeEndpoint)
@@ -794,6 +795,7 @@ func run(ctx context.Context, s *options.KubeletServer, kubeDeps *kubelet.Depend
 		return err
 	}
 
+	// Run the Kubelet!
 	if err := RunKubelet(s, kubeDeps, s.RunOnce); err != nil {
 		return err
 	}
